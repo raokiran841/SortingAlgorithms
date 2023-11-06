@@ -1,14 +1,20 @@
 package com.kkr.sortingAlgorithms;
 
-public class BuildMaxHeap {
-
-    public static void main(String[] args) {
-
-    }
+public class HeapSort {
     private static int heapSize = 0;
 
+    /**
+     * Time complexity for heap sort is O(nlogn)
+     * Space Complexity is O(logn) for auxiliary stack space
+     * */
     public static int[] sort(int[] arr){
-        buildMapHeap(arr);
+        buildMaxHeap(arr);
+        int n = arr.length;
+        for(int i=n-1; i>=1; i--){
+            swap(arr, 0, i);
+            heapSize--;
+            maxHeapify(arr, 0);
+        }
         return arr;
     }
 
@@ -19,7 +25,7 @@ public class BuildMaxHeap {
      *
      * Space Complexity O(logn) auxiliary stack space for heapify method.
      * */
-    private static void buildMapHeap(int[] arr){
+    private static void buildMaxHeap(int[] arr){
         heapSize = arr.length-1;
         for(int i = (heapSize/2)-1; i>=0; i--){
             maxHeapify(arr, i);
@@ -57,6 +63,7 @@ public class BuildMaxHeap {
      * @param heap A max heap
      * */
     public static int extractMax(int[] heap){
+        heapSize = heap.length-1;
         if(heapSize <= 0){
             return Integer.MIN_VALUE;
         }
